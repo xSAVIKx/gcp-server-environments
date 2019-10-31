@@ -1,0 +1,3 @@
+tensorflow>=1.15.0
+textgenrnn>=1.5.0
+flask>=1.1.1
