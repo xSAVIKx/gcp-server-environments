@@ -7,7 +7,7 @@ This package represents a GCF deployment unit.
 
 Execute the following command from the terminal:
 ```bash
-gcloud app create --region=us-central1
+gcloud app create --region=us-central
 gcloud app deploy \
     --project=<project-id>
 ```

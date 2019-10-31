@@ -8,7 +8,7 @@ This package represents a GCF deployment unit.
 Execute the following command from the terminal:
 ```bash
 gcloud functions deploy <function-name> \
-    --region=us-central1
+    --region=us-central
     --entry-point=main
     --runtime=python37
     --trigger-http
