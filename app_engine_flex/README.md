@@ -1,7 +1,7 @@
-Google Cloud Functions
+App Engine Flex
 -------
 
-This package represents a GCF deployment unit.
+This package represents a GAE Flex deployment unit.
 
 ## How to deploy
 

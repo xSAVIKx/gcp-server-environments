@@ -1,7 +1,7 @@
-Google Cloud Functions
+App Engine Standard
 -------
 
-This package represents a GCF deployment unit.
+This package represents a GAE Standard deployment unit.
 
 ## How to deploy
 
