@@ -16,7 +16,7 @@ gcloud functions deploy ru-proverb \
     --entry-point=main \
     --runtime=python37 \
     --trigger-http \
-    --memory=1024MB \
+    --memory=1024M \
     --allow-unauthenticated \
     --project="${GCP_PROJECT_ID}"
 
