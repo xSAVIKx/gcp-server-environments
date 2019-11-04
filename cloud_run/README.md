@@ -16,9 +16,10 @@ gcloud builds submit \
     --tag="${GCR_TAG}" \
     --project="${GCP_PROJECT_ID}"
 
-gcloud beta run deploy \
+gcloud beta run deploy ru_proverbs \
     --image="${GCR_TAG}" \
     --platform=managed \
+    --allow-unauthenticated \
     --project="${GCP_PROJECT_ID}"
 
 ```
