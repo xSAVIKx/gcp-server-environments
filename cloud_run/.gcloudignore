@@ -147,4 +147,5 @@ Temporary Items
 .gitignore
 deploy.bat
 deploy.sh
+.dockerignore
 README.md
