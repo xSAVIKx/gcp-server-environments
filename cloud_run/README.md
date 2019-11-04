@@ -28,6 +28,7 @@ gcloud beta run deploy ru-proverbs \
     --image="${GCR_TAG}" \
     --platform=managed \
     --allow-unauthenticated \
+    --memory=1024M \
     --project="${GCP_PROJECT_ID}"
 
 ```
