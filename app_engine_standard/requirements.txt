@@ -1,4 +1,4 @@
-git+https://github.com/xSAVIKx/ru-proverbs@bc0050ad696561fb44b59ee5b20176c2a375e8b0#egg=ru_proverbs
+git+https://github.com/xSAVIKx/ru-proverbs@c86048996d747955858280d6bcbad1ba322b5af8#egg=ru_proverbs
 tensorflow==1.14.0
 textgenrnn>=1.5.0
 flask>=1.1.1
