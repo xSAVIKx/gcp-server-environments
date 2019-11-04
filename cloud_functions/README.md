@@ -11,12 +11,13 @@ Execute the following command from the terminal:
 
 GCP_PROJECT_ID=<project-id>
 
-gcloud functions deploy <function-name> \
-    --region=us-central
-    --entry-point=main
-    --runtime=python37
-    --trigger-http
-    --memory=1024MB
+gcloud functions deploy ru-proverb \
+    --region=us-central1 \
+    --entry-point=main \
+    --runtime=python37 \
+    --trigger-http \
+    --memory=1024MB \
+    --allow-unauthenticated \
     --project="${GCP_PROJECT_ID}"
 
 ```
