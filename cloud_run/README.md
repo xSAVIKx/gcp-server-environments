@@ -26,6 +26,7 @@ rm -rf build
 
 gcloud beta run deploy ru-proverbs \
     --image="${GCR_TAG}" \
+    --region=us-central1 \
     --platform=managed \
     --allow-unauthenticated \
     --memory=1024M \
