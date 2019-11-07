@@ -1,37 +1,22 @@
 #!/usr/bin/env bash
 
-# Perform logging to the StackDriver.
-function log(){
-    local level="${1}"
-    local log_message="${2}"
-    logger -p "${level}" -t startup-script "${log_message}"
-}
-# Perform logging to the StackDriver using info level.
-function info(){
-    log "user.info" "${1}"
-}
+logger -p "user.info" -t startup-script "Starting startup script execution..."
 
-info "Starting startup script execution..."
-
-GCE_HOME_DIR="${GCE_HOME_DIR:-/usr/local/gce}"
 GCE_USER="${GCE_USER:-gce}"
-
-info "Cloning source repository."
-
-git clone https://github.com/xSAVIKx/gcp-server-environments.git "${GCE_HOME_DIR}/gcp-server-environments"
-
-sudo chown -R "${GCE_USER}:${GCS_USER}" "${GCE_HOME_DIR}/gcp-server-environments"
-
-cd "${GCE_HOME_DIR}/gcp-server-environments/compute_engine"
-
-info "Starting application..."
 
 sudo su - "${GCE_USER}" bash -c \
 '
+logger -p "user.info" -t startup-script "Cloning source code repository."
+git clone https://github.com/xSAVIKx/gcp-server-environments.git
+
+cd gcp-server-environments/compute_engine/
+
+logger -p "user.info" -t startup-script "creating virtual environment."
 python3.7 -m venv .venv
 
+logger -p "user.info" -t startup-script "activating virtual environment."
 source .venv/bin/activate
-
+logger -p "user.info" -t startup-script "installing requirements."
 pip install -r requirements.txt
 
 gunicorn --bind :8080 --workers 1 --threads 8 --timeout 120 --log-file /var/log/gce/python-runner/runner.log.json --log-level DEBUG main:app
