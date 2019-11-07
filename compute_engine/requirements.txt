@@ -4,3 +4,4 @@ textgenrnn>=1.5.0
 flask>=1.1.1
 gunicorn==19.5.0
 python-json-logger==0.1.11
+gunicorn==19.5.0
