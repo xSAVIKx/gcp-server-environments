@@ -1,12 +1,12 @@
 {
   "variables": {
     "gcp_project_id": "{{env `GCP_PROJECT_ID`}}",
-    "gcp_zone": "{{env `GCP_ZONE`}}",
+    "gcp_zone": "{{env `GCP_ZONE`}}"
   },
   "builders": [
     {
       "type": "googlecompute",
-      "project_id": "{{user `gcloud_project_id`}}",
+      "project_id": "{{user `gcp_project_id`}}",
       "source_image_family": "ubuntu-1804-lts",
       "source_image": "ubuntu-1804-bionic-v20191021",
       "zone": "{{user `gcp_zone`}}",
@@ -28,9 +28,9 @@
       "scripts": [
         "./_setup-user.sh",
         "./_install-tools.sh",
-        "./_install_logging_agent.sh",
-        "./_install_monitoring_agent.sh",
-        "./_create_stackdriver_configuration.sh"
+        "./_install-logging-agent.sh",
+        "./_install-monitoring-agent.sh",
+        "./_create-logging-configuration.sh"
       ]
     }
   ],
