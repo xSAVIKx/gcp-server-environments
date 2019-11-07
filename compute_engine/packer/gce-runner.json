@@ -1,0 +1,44 @@
+{
+  "variables": {
+    "gcp_project_id": "{{env `GCP_PROJECT_ID`}}",
+    "gcp_zone": "{{env `GCP_ZONE`}}",
+  },
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `gcloud_project_id`}}",
+      "source_image_family": "ubuntu-1804-lts",
+      "source_image": "ubuntu-1804-bionic-v20191021",
+      "zone": "{{user `gcp_zone`}}",
+      "disk_size": "30",
+      "image_name": "gce-python-runner-v{{isotime \"2006-01-02\"}}",
+      "image_family": "gce-python-runner",
+      "ssh_username": "packer-builder",
+      "image_description": "Ubuntu 18.04 image with Python 3.7.5, Stackdriver monitoring and logging agents.",
+      "image_labels": {
+        "type": "gce-python-runner"
+      },
+      "machine_type": "n2-highcpu-8",
+      "preemptible": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "./_setup-user.sh",
+        "./_install-tools.sh",
+        "./_install_logging_agent.sh",
+        "./_install_monitoring_agent.sh",
+        "./_create_stackdriver_configuration.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "packer_manifest.json",
+      "strip_path": true
+    }
+  ]
+}
