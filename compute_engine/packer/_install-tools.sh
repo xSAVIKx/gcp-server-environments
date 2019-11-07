@@ -2,9 +2,8 @@
 
 set -x
 
-sudo apt-get update
-sudo apt install software-properties-common
 sudo add-apt-repository -y ppa:deadsnakes/ppa
+sudo apt-get update
 sudo apt-get -y upgrade
 
 sudo apt-get -y install nano \
