@@ -9,7 +9,7 @@ sudo chown -R "${GCE_USER}:${GCS_USER}" "${GCE_HOME_DIR}/gcp-server-environments
 
 cd "${GCE_HOME_DIR}/gcp-server-environments"
 
-sudo -u "${GCE_USER}" bash -c \
+sudo su - "${GCE_USER}" bash -c \
 '
 python3.7 -m venv .venv
 
