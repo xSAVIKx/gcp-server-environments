@@ -7,7 +7,7 @@ git clone https://github.com/xSAVIKx/gcp-server-environments.git "${GCE_HOME_DIR
 
 sudo chown -R "${GCE_USER}:${GCS_USER}" "${GCE_HOME_DIR}/gcp-server-environments"
 
-cd "${GCE_HOME_DIR}/gcp-server-environments"
+cd "${GCE_HOME_DIR}/gcp-server-environments/compute_engine"
 
 sudo su - "${GCE_USER}" bash -c \
 '
