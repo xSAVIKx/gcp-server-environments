@@ -1,13 +1,30 @@
 #!/usr/bin/env bash
 
+# Perform logging to the StackDriver.
+function log(){
+    local level="${1}"
+    local log_message="${2}"
+    logger -p "${level}" -t startup-script "${log_message}"
+}
+# Perform logging to the StackDriver using info level.
+function info(){
+    log "user.info" "${1}"
+}
+
+info "Starting startup script execution..."
+
 GCE_HOME_DIR="${GCE_HOME_DIR:-/usr/local/gce}"
 GCE_USER="${GCE_USER:-gce}"
+
+info "Cloning source repository."
 
 git clone https://github.com/xSAVIKx/gcp-server-environments.git "${GCE_HOME_DIR}/gcp-server-environments"
 
 sudo chown -R "${GCE_USER}:${GCS_USER}" "${GCE_HOME_DIR}/gcp-server-environments"
 
 cd "${GCE_HOME_DIR}/gcp-server-environments/compute_engine"
+
+info "Starting application..."
 
 sudo su - "${GCE_USER}" bash -c \
 '
