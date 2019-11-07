@@ -77,3 +77,10 @@ gcloud compute instance-groups managed update "${MANAGED_GROUP_NAME}" \
     --health-check="${HEALTH_CHECK_NAME}" \
     --zone="${ZONE}" \
     --project="${CURRENT_GCLOUD_PROJECT}"
+
+gcloud compute instance-groups managed set-autoscaling "${MANAGED_GROUP_NAME}" \
+    --max-num-replicas=2 \
+    --min-num-replicas=0 \
+    --target-cpu-utilization 0.75 \
+    --zone="${ZONE}" \
+    --project="${CURRENT_GCLOUD_PROJECT}"
