@@ -1,6 +1,7 @@
 runtime: python
 env: flex
 entrypoint: gunicorn -b :8080 -w 2 --timeout 120 main:app
+service: flex-proverbs
 
 runtime_config:
   python_version: 3

@@ -1,5 +1,6 @@
 runtime: python37
 entrypoint: gunicorn -b :8080 -w 2 --timeout 120 main:app
+service: standard-proverbs
 
 instance_class: B4_1G
 
