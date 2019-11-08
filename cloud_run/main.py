@@ -10,7 +10,7 @@ app = Flask(__name__)
 def root():
     temperature = request.args.get('temperature', default=0.18)
     logging.info('Generating new proverbs with temperature: %s' % temperature)
-    response = generate_proverb(temperature)
+    response = generate_proverb(float(temperature))
     logging.info('Proverb: %s' % response)
     return "Я Cloud Run и вот ваша поговорка: " + ''.join(response)
 
