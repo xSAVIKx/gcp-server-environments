@@ -1,7 +1,6 @@
 import logging
 import sys
 
-from flask import Flask
 from pythonjsonlogger import jsonlogger
 
 
@@ -21,6 +20,7 @@ handler.setFormatter(formatter)
 root_logger = logging.getLogger()
 root_logger.addHandler(handler)
 
+from flask import Flask, request
 from ru_proverbs.generator import generate_proverb
 
 app = Flask(__name__)
@@ -28,8 +28,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    response = generate_proverb()
-    return "I'm Compute Engine and here is your proverb: " + ''.join(response)
+    temperature = request.args.get('temperature', default=0.18)
+    logging.info('Generating new proverbs with temperature: %s' % temperature)
+    response = generate_proverb(temperature)
+    logging.info('Proverb: %s' % response)
+    return "Я Compute Engine и вот ваша поговорка: " + ''.join(response)
 
 
 if __name__ == '__main__':

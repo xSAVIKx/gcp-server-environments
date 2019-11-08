@@ -1,5 +1,6 @@
-from flask import Flask
+import logging
 
+from flask import Flask, request
 from ru_proverbs.generator import generate_proverb
 
 app = Flask(__name__)
@@ -7,8 +8,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    response = generate_proverb()
-    return "I'm App Engine Standard and here is your proverb: " + ''.join(response)
+    temperature = request.args.get('temperature', default=0.18)
+    logging.info('Generating new proverbs with temperature: %s' % temperature)
+    response = generate_proverb(temperature)
+    logging.info('Proverb: %s' % response)
+    return "Я App Engine Standard и вот ваша поговорка: " + ''.join(response)
 
 
 if __name__ == '__main__':
