@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def root():
     response = generate_proverb()
-    return ''.join(response)
+    return "I'm Cloud Run and here is your proverb: " + ''.join(response)
 
 
 if __name__ == '__main__':
