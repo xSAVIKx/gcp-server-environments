@@ -32,7 +32,7 @@ def root():
     logging.info('Generating new proverbs with temperature: %s' % temperature)
     response = generate_proverb(float(temperature))
     logging.info('Proverb: %s' % response)
-    return "Я Compute Engine и вот ваша поговорка: " + ''.join(response)
+    return "Я Compute Engine, и вот вам поговорка: " + ''.join(response)
 
 
 if __name__ == '__main__':
