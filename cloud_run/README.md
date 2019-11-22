@@ -16,7 +16,7 @@ gcloud builds submit \
     --tag="${GCR_TAG}" \
     --project="${GCP_PROJECT_ID}"
 
-gcloud beta run deploy ru-proverbs \
+gcloud run deploy ru-proverbs \
     --image="${GCR_TAG}" \
     --region=us-central1 \
     --platform=managed \

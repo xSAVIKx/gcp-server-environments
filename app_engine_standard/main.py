@@ -12,7 +12,7 @@ def root():
     logging.info('Generating new proverbs with temperature: %s' % temperature)
     response = generate_proverb(float(temperature))
     logging.info('Proverb: %s' % response)
-    return "Я App Engine Standard, и вот вам поговорка: " + ''.join(response)
+    return ''.join(response)
 
 
 if __name__ == '__main__':
