@@ -8,7 +8,7 @@
       "type": "googlecompute",
       "project_id": "{{user `gcp_project_id`}}",
       "source_image_family": "ubuntu-1804-lts",
-      "source_image": "ubuntu-1804-bionic-v20191021",
+      "source_image": "ubuntu-1804-bionic-v20191113",
       "zone": "{{user `gcp_zone`}}",
       "disk_size": "30",
       "image_name": "gce-python-runner-v{{isotime \"2006-01-02\"}}",
