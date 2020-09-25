@@ -1,4 +1,4 @@
-tensorflow==2.1.0
+tensorflow==2.1.2
 textgenrnn==2.0.0
 ru-proverbs==1.0.1
 flask==1.1.1
