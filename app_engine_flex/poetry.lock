@@ -553,15 +553,15 @@ pyasn1 = ">=0.1.3"
 
 [[package]]
 name = "ru-proverbs"
-version = "1.1.0"
-description = "RU Proverbs generator"
+version = "1.1.2"
+description = "Russian Proverbs AI-powered proverbs generator."
 category = "main"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.7,<4.0"
 
 [package.dependencies]
-tensorflow = ">=2.3.1"
-textgenrnn = ">=2.0.0"
+tensorflow = ">=2.3.1,<3.0.0"
+textgenrnn = ">=2.0.0,<3.0.0"
 
 [[package]]
 name = "scikit-learn"
@@ -802,7 +802,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "36564de86cc42c2af2e944986822984e2f1c0b3b1a022143f92e5f1ac8402408"
+content-hash = "26f69e7d948bbf1c7c7f14e94231a9fa14163c1f06cff1661da53f18f232b5b2"
 
 [metadata.files]
 absl-py = [
@@ -1234,8 +1234,8 @@ rsa = [
     {file = "rsa-4.7.2.tar.gz", hash = "sha256:9d689e6ca1b3038bc82bf8d23e944b6b6037bc02301a574935b2dd946e0353b9"},
 ]
 ru-proverbs = [
-    {file = "ru_proverbs-1.1.0-py3-none-any.whl", hash = "sha256:8c9912ded619a8c6ae9e651901fd7325c45dedb464cf057a38344124355c1e29"},
-    {file = "ru_proverbs-1.1.0.tar.gz", hash = "sha256:0f75b47d6c53439d6137e1e20e4bc06ab6bb2d102b15bb0f354c7cbe97dbd999"},
+    {file = "ru_proverbs-1.1.2-py3-none-any.whl", hash = "sha256:730253d995206bd48a2550dc9317f71f3f732c10cb1502a3184993fe8fba5a2a"},
+    {file = "ru_proverbs-1.1.2.tar.gz", hash = "sha256:b644ecc3ae61d72bf40ace53ab15a36d169d87938fc7b8392b5863fb25cd7365"},
 ]
 scikit-learn = [
     {file = "scikit-learn-0.24.2.tar.gz", hash = "sha256:d14701a12417930392cd3898e9646cf5670c190b933625ebe7511b1f7d7b8736"},
