@@ -67,7 +67,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: poetry install
-      - run: source .venv/bin/activate
       - name: Run Black
         run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
@@ -111,7 +110,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: poetry install
-      - run: source .venv/bin/activate
       - name: Run Black
         run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
@@ -155,7 +153,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: poetry install
-      - run: source .venv/bin/activate
       - name: Run Black
         run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
@@ -199,7 +196,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: poetry install
-      - run: source .venv/bin/activate
       - name: Run Black
         run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
@@ -243,7 +239,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: poetry install
-      - run: source .venv/bin/activate
       - name: Run Black
         run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
