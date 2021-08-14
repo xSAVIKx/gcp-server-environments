@@ -10,6 +10,7 @@ on:
       - development
 env:
   PYTHON_VESRION: '3.7'
+  POETRY_VERSION: '1.1.7'
 jobs:
   # JOB to run change detection
   changes:
@@ -58,18 +59,16 @@ jobs:
           key: venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('requirements.txt') }}
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2.1.2
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          python -m pip install pip --upgrade
-          pip install -r requirements.txt
-          pip install -r requirements-ci.txt
+        run: poetry install
       - run: source .venv/bin/activate
       - name: Run Black
-        run: |
-          python -m black . --check --diff --color
+        run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -80,8 +79,7 @@ jobs:
         run: gcloud auth configure-docker
       - name: Run MyPy checks
         continue-on-error: true
-        run: |
-          python -m mypy . --show-error-context --pretty
+        run: poetry run mypy . --show-error-context --pretty
 
   app_engine_standard:
     needs: [ 'changes' ]
@@ -104,18 +102,16 @@ jobs:
           key: venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('requirements.txt') }}
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2.1.2
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          python -m pip install pip --upgrade
-          pip install -r requirements.txt
-          pip install -r requirements-ci.txt
+        run: poetry install
       - run: source .venv/bin/activate
       - name: Run Black
-        run: |
-          python -m black . --check --diff --color
+        run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -126,8 +122,7 @@ jobs:
         run: gcloud auth configure-docker
       - name: Run MyPy checks
         continue-on-error: true
-        run: |
-          python -m mypy . --show-error-context --pretty
+        run: poetry run mypy . --show-error-context --pretty
 
   cloud_functions:
     needs: [ 'changes' ]
@@ -150,18 +145,16 @@ jobs:
           key: venv-${{ runner.os }}-cloud_functions-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             venv-${{ runner.os }}-cloud_functions-${{ hashFiles('requirements.txt') }}
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2.1.2
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          python -m pip install pip --upgrade
-          pip install -r requirements.txt
-          pip install -r requirements-ci.txt
+        run: poetry install
       - run: source .venv/bin/activate
       - name: Run Black
-        run: |
-          python -m black . --check --diff --color
+        run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -172,8 +165,7 @@ jobs:
         run: gcloud auth configure-docker
       - name: Run MyPy checks
         continue-on-error: true
-        run: |
-          python -m mypy . --show-error-context --pretty
+        run: poetry run mypy . --show-error-context --pretty
 
   cloud_run:
     needs: [ 'changes' ]
@@ -196,18 +188,16 @@ jobs:
           key: venv-${{ runner.os }}-cloud_run-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             venv-${{ runner.os }}-cloud_run-${{ hashFiles('requirements.txt') }}
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2.1.2
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          python -m pip install pip --upgrade
-          pip install -r requirements.txt
-          pip install -r requirements-ci.txt
+        run: poetry install
       - run: source .venv/bin/activate
       - name: Run Black
-        run: |
-          python -m black . --check --diff --color
+        run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -218,8 +208,7 @@ jobs:
         run: gcloud auth configure-docker
       - name: Run MyPy checks
         continue-on-error: true
-        run: |
-          python -m mypy . --show-error-context --pretty
+        run: poetry run mypy . --show-error-context --pretty
 
   compute_engine:
     needs: [ 'changes' ]
@@ -242,18 +231,16 @@ jobs:
           key: venv-${{ runner.os }}-compute_engine-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             venv-${{ runner.os }}-compute_engine-${{ hashFiles('requirements.txt') }}
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2.1.2
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          python -m pip install pip --upgrade
-          pip install -r requirements.txt
-          pip install -r requirements-ci.txt
+        run: poetry install
       - run: source .venv/bin/activate
       - name: Run Black
-        run: |
-          python -m black . --check --diff --color
+        run: poetry run black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -264,5 +251,4 @@ jobs:
         run: gcloud auth configure-docker
       - name: Run MyPy checks
         continue-on-error: true
-        run: |
-          python -m mypy . --show-error-context --pretty
+        run: poetry run mypy . --show-error-context --pretty
