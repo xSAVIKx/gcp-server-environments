@@ -69,7 +69,7 @@ jobs:
       - run: source .venv/bin/activate
       - name: Run Black
         run: |
-          black . --check --diff --color
+          python -m black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -81,7 +81,7 @@ jobs:
       - name: Run MyPy checks
         continue-on-error: true
         run: |
-          mypy . --show-error-context --pretty
+          python -m mypy . --show-error-context --pretty
 
   app_engine_standard:
     needs: [ 'changes' ]
@@ -115,7 +115,7 @@ jobs:
       - run: source .venv/bin/activate
       - name: Run Black
         run: |
-          black . --check --diff --color
+          python -m black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -127,7 +127,7 @@ jobs:
       - name: Run MyPy checks
         continue-on-error: true
         run: |
-          mypy . --show-error-context --pretty
+          python -m mypy . --show-error-context --pretty
 
   cloud_functions:
     needs: [ 'changes' ]
@@ -161,7 +161,7 @@ jobs:
       - run: source .venv/bin/activate
       - name: Run Black
         run: |
-          black . --check --diff --color
+          python -m black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -173,7 +173,7 @@ jobs:
       - name: Run MyPy checks
         continue-on-error: true
         run: |
-          mypy . --show-error-context --pretty
+          python -m mypy . --show-error-context --pretty
 
   cloud_run:
     needs: [ 'changes' ]
@@ -207,7 +207,7 @@ jobs:
       - run: source .venv/bin/activate
       - name: Run Black
         run: |
-          black . --check --diff --color
+          python -m black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -219,7 +219,7 @@ jobs:
       - name: Run MyPy checks
         continue-on-error: true
         run: |
-          mypy . --show-error-context --pretty
+          python -m mypy . --show-error-context --pretty
 
   compute_engine:
     needs: [ 'changes' ]
@@ -253,7 +253,7 @@ jobs:
       - run: source .venv/bin/activate
       - name: Run Black
         run: |
-          black . --check --diff --color
+          python -m black . --check --diff --color
       - name: "Set up GCloud SDK"
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -265,4 +265,4 @@ jobs:
       - name: Run MyPy checks
         continue-on-error: true
         run: |
-          mypy . --show-error-context --pretty
+          python -m mypy . --show-error-context --pretty
