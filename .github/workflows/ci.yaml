@@ -227,7 +227,7 @@ jobs:
         id: cache
         uses: actions/cache@v2
         with:
-          path: "cloud_run/.venv"
+          path: "compute_engine/.venv"
           key: venv-${{ runner.os }}-compute_engine-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             venv-${{ runner.os }}-compute_engine-${{ hashFiles('poetry.lock') }}
