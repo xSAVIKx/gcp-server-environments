@@ -56,9 +56,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "app_engine_flex/.venv"
-          key: venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('requirements.txt') }}
+          key: venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('requirements.txt') }}
+            venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('poetry.lock') }}
+            venv-${{ runner.os }}-app_engine_flex
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2.1.2
         with:
@@ -99,9 +100,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "app_engine_standard/.venv"
-          key: venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('requirements.txt') }}
+          key: venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('requirements.txt') }}
+            venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('poetry.lock') }}
+            venv-${{ runner.os }}-app_engine_standard
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2.1.2
         with:
@@ -142,9 +144,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "cloud_functions/.venv"
-          key: venv-${{ runner.os }}-cloud_functions-${{ hashFiles('requirements.txt') }}
+          key: venv-${{ runner.os }}-cloud_functions-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            venv-${{ runner.os }}-cloud_functions-${{ hashFiles('requirements.txt') }}
+            venv-${{ runner.os }}-cloud_functions-${{ hashFiles('poetry.lock') }}
+            venv-${{ runner.os }}-cloud_functions
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2.1.2
         with:
@@ -185,9 +188,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "cloud_run/.venv"
-          key: venv-${{ runner.os }}-cloud_run-${{ hashFiles('requirements.txt') }}
+          key: venv-${{ runner.os }}-cloud_run-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            venv-${{ runner.os }}-cloud_run-${{ hashFiles('requirements.txt') }}
+            venv-${{ runner.os }}-cloud_run-${{ hashFiles('poetry.lock') }}
+            venv-${{ runner.os }}-cloud_run
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2.1.2
         with:
@@ -228,9 +232,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "cloud_run/.venv"
-          key: venv-${{ runner.os }}-compute_engine-${{ hashFiles('requirements.txt') }}
+          key: venv-${{ runner.os }}-compute_engine-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            venv-${{ runner.os }}-compute_engine-${{ hashFiles('requirements.txt') }}
+            venv-${{ runner.os }}-compute_engine-${{ hashFiles('poetry.lock') }}
+            venv-${{ runner.os }}-compute_engine
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2.1.2
         with:
