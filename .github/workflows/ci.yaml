@@ -1,0 +1,268 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - development
+env:
+  PYTHON_VESRION: '3.7'
+jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-20.04
+    outputs:
+      app_engine_flex: ${{ steps.filter.outputs.app_engine_flex }}
+      app_engine_standard: ${{ steps.filter.outputs.app_engine_standard }}
+      cloud_functions: ${{ steps.filter.outputs.cloud_functions }}
+      cloud_run: ${{ steps.filter.outputs.cloud_run }}
+      compute_engine: ${{ steps.filter.outputs.compute_engine }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          token: ${{ github.token }}
+          filters: |
+            app_engine_flex:
+              - 'app_engine_flex/**'
+            app_engine_standard:
+              - 'app_engine_standard/**'
+            cloud_functions:
+              - 'cloud_functions/**'
+            cloud_run:
+              - 'cloud_run/**'
+            compute_engine:
+              - 'compute_engine/**'
+  app_engine_flex:
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.app_engine_flex == 'true' }}
+    defaults:
+      run:
+        working-directory: app_engine_flex
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VESRION }}
+      - name: Load cached venv
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: "app_engine_flex/.venv"
+          key: venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            venv-${{ runner.os }}-app_engine_flex-${{ hashFiles('requirements.txt') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install pip --upgrade
+          pip install -r requirements.txt
+          pip install -r requirements-ci.txt
+      - run: source .venv/bin/activate
+      - name: Run Black
+        run: |
+          black . --check --diff --color
+      - name: "Set up GCloud SDK"
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: Configure GCR
+        run: gcloud auth configure-docker
+      - name: Run MyPy checks
+        continue-on-error: true
+        run: |
+          mypy . --show-error-context --pretty
+
+  app_engine_standard:
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.app_engine_standard == 'true' }}
+    defaults:
+      run:
+        working-directory: app_engine_standard
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VESRION }}
+      - name: Load cached venv
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: "app_engine_standard/.venv"
+          key: venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            venv-${{ runner.os }}-app_engine_standard-${{ hashFiles('requirements.txt') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install pip --upgrade
+          pip install -r requirements.txt
+          pip install -r requirements-ci.txt
+      - run: source .venv/bin/activate
+      - name: Run Black
+        run: |
+          black . --check --diff --color
+      - name: "Set up GCloud SDK"
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: Configure GCR
+        run: gcloud auth configure-docker
+      - name: Run MyPy checks
+        continue-on-error: true
+        run: |
+          mypy . --show-error-context --pretty
+
+  cloud_functions:
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.cloud_functions == 'true' }}
+    defaults:
+      run:
+        working-directory: cloud_functions
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VESRION }}
+      - name: Load cached venv
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: "cloud_functions/.venv"
+          key: venv-${{ runner.os }}-cloud_functions-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            venv-${{ runner.os }}-cloud_functions-${{ hashFiles('requirements.txt') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install pip --upgrade
+          pip install -r requirements.txt
+          pip install -r requirements-ci.txt
+      - run: source .venv/bin/activate
+      - name: Run Black
+        run: |
+          black . --check --diff --color
+      - name: "Set up GCloud SDK"
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: Configure GCR
+        run: gcloud auth configure-docker
+      - name: Run MyPy checks
+        continue-on-error: true
+        run: |
+          mypy . --show-error-context --pretty
+
+  cloud_run:
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.cloud_run == 'true' }}
+    defaults:
+      run:
+        working-directory: cloud_run
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VESRION }}
+      - name: Load cached venv
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: "cloud_run/.venv"
+          key: venv-${{ runner.os }}-cloud_run-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            venv-${{ runner.os }}-cloud_run-${{ hashFiles('requirements.txt') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install pip --upgrade
+          pip install -r requirements.txt
+          pip install -r requirements-ci.txt
+      - run: source .venv/bin/activate
+      - name: Run Black
+        run: |
+          black . --check --diff --color
+      - name: "Set up GCloud SDK"
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: Configure GCR
+        run: gcloud auth configure-docker
+      - name: Run MyPy checks
+        continue-on-error: true
+        run: |
+          mypy . --show-error-context --pretty
+
+  compute_engine:
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.compute_engine == 'true' }}
+    defaults:
+      run:
+        working-directory: compute_engine
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VESRION }}
+      - name: Load cached venv
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: "cloud_run/.venv"
+          key: venv-${{ runner.os }}-compute_engine-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            venv-${{ runner.os }}-compute_engine-${{ hashFiles('requirements.txt') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install pip --upgrade
+          pip install -r requirements.txt
+          pip install -r requirements-ci.txt
+      - run: source .venv/bin/activate
+      - name: Run Black
+        run: |
+          black . --check --diff --color
+      - name: "Set up GCloud SDK"
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: Configure GCR
+        run: gcloud auth configure-docker
+      - name: Run MyPy checks
+        continue-on-error: true
+        run: |
+          mypy . --show-error-context --pretty
